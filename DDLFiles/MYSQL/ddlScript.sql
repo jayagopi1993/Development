@@ -1,8 +1,19 @@
+ALTER TABLE Persons
+DROP CONSTRAINT PK_Person;
+
+INSERT INTO TESTTABLEONE (DATFUNCTION) VALUES(SYSDATE());
+
+DROP INDEX index_name;
+
 CREATE TABLE TESTTABLEONE(
-colOne1 varchar2(100),
+colOne1 varchar2(100 CHAR),
 colTwo1 Number(10,0),
+colTwo1 Number(10,0),
+colOne1 varchar2(100 CHAR),
 colThree1 Number,
 colFour1 BLOB,
+colFive1 CLOB
+colTwo1 Number(10,0),
 colFive1 CLOB
 );
 
@@ -50,4 +61,3 @@ colFour3 BLOB,
 colTwo2 Number(0,0),
 colFive3 CLOB
 );
-

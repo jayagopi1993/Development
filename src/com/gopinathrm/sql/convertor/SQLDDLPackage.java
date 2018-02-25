@@ -2,32 +2,14 @@ package com.gopinathrm.sql.convertor;
 
 public class SQLDDLPackage {
 
-	private StringBuilder createStatement = new StringBuilder();
-	private StringBuilder dropStatement = new StringBuilder();
-	private StringBuilder alterStatement = new StringBuilder();
+	private StringBuilder sqlStatement = new StringBuilder();
 
-	public StringBuilder getCreateStatement() {
-		return createStatement;
+	public StringBuilder getSqlStatement() {
+		return sqlStatement;
 	}
 
-	public void setCreateStatement(StringBuilder createStatement) {
-		this.createStatement = createStatement;
-	}
-
-	public StringBuilder getDropStatement() {
-		return dropStatement;
-	}
-
-	public void setDropStatement(StringBuilder dropStatement) {
-		this.dropStatement = dropStatement;
-	}
-
-	public StringBuilder getAlterStatement() {
-		return alterStatement;
-	}
-
-	public void setAlterStatement(StringBuilder alterStatement) {
-		this.alterStatement = alterStatement;
+	public void setSqlStatement(StringBuilder createStatement) {
+		this.sqlStatement = createStatement;
 	}
 
 }
