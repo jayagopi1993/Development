@@ -74,7 +74,7 @@ public class DMLConvertLoaderImpl implements DMLConvertLoader {
 		if (replacedString.contains(AppConstants.INSERT_STATEMENT)) {
 
 			for (String dataType : dataTypes.keySet()) {
-				replacedString = replacedString.replaceAll(dataType, dataTypes.get(dataType));
+				replacedString = replacedString.replace(dataType, dataTypes.get(dataType));
 			}
 
 			sqlDDLPackage.getSqlStatement().setLength(0);
@@ -107,5 +107,46 @@ public class DMLConvertLoaderImpl implements DMLConvertLoader {
 		return listSQLDDLPackage;
 
 	}
+	
+	
+	
+	
+	
+	
+	public void displayDirectoryContents(File folder,String from, String to) {
+		if (AppConstants.MAPPING_FILES_DML.containsKey(from + "_" + to)) {
+			for (final String name : AppConstants.MAPPING_FILES_DML.get(from + "_" + to).stringPropertyNames())
+				dataTypes.put(name, AppConstants.MAPPING_FILES_DML.get(from + "_" + to).getProperty(name));
+		try {
+			File[] files = folder.listFiles();
+			String root = folder.getCanonicalPath();
+			String temp = root;
+			File parentOfRoot = folder.getParentFile();
+			String outputRoot = parentOfRoot.getCanonicalPath()+"\\Output"+to;
+			for (File file : files) {
+				if (file.isDirectory()) {
+					 temp = file.getCanonicalPath();
+					 temp.replace(root, outputRoot);
+					System.out.println("directory:" + file.getCanonicalPath());
+					displayDirectoryContents(file,from,to);
+				} else {
+					List<SQLDDLPackage> listSQLDDLPackage = this.extractSQLFromFile(file.getAbsolutePath());
+					this.dumpSQLFromPackage(listSQLDDLPackage, temp, file.getName());
+					System.out.println("     file:" + file.getCanonicalPath());
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		} else {
+			System.out.println("DML Mapping.properties file not found!! [" + from + "-" + to + "]");
+		}
+
+	}
+
+	
+	
+	
+
 
 }
